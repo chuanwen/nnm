@@ -24,33 +24,38 @@
 #' @param learningRate a float between 0 and 1, default 0.25.
 #'
 #' @examples
-#' x = iris[, 1:4]
-#' y = iris[, 5]
-#' mod = nnm(x, y, list(Dense(4, 3, Activation.Identity), Softmax))
+#' x <- iris[, 1:4]
+#' y <- iris[, 5]
+#' mod <- nnm(x, y, list(Dense(4, 3, Activation.Identity), Softmax))
 #' mod
 #'
 #' # example usage when x has factor cols
-#' y = iris[, 1]
-#' x = iris[, 2:5]
-#' layerSpecs = list(Dense(3+nlevels(x$Species), 2), Dense(2, 1, Activation.Identity))
-#' mod = nnm(x, y, layerSpecs)
+#' y <- iris[, 1]
+#' x <- iris[, 2:5]
+#' layerSpecs <- list(Dense(3+nlevels(x$Species), 2), Dense(2, 1, Activation.Identity))
+#' mod <- nnm(x, y, layerSpecs)
 #' mod
 #'
 #' # example usage of embedding
-#' y = iris[, 1]
-#' x = iris[, 2:5]
-#' embeddingCols = "Species"
-#' embeddingDims = 2
-#' layerSpecs = list(Dense(3+embeddingDims, 2), Dense(2, 1, Activation.Identity))
-#' mod = nnm(x, y, layerSpecs, embeddingCols, embeddingDims)
+#' y <- iris[, 1]
+#' x <- iris[, 2:5]
+#' embeddingCols <- "Species"
+#' embeddingDims <- 2
+#' layerSpecs <- list(Dense(3+embeddingDims, 2), Dense(2, 1, Activation.Identity))
+#' mod <- nnm(x, y, layerSpecs, embeddingCols, embeddingDims)
 #' mod
 #'
 #' # example model for MNIST data
-#' mnist <- LoadMnist("/home/ccw/learning/data/mnist")
+#' mnist <- LoadMnist()
 #' train <- mnist$train
 #' test <- mnist$test
-#' mod = nnm(train$x, train$y, list(Dense(784, 15),
-#'   Dense(15, 10, Activation.Identity), Softmax), verbose=1)
+#' layerSpec <- list(
+#'    Dense(784, 128),
+#'    Dropout(128, keepProb=0.8),
+#'    Dense(128, 10, Activation.Identity),
+#'    Softmax)
+#' layerSpec
+#' mod <- nnm(train$x, train$y, layerSpec, verbose=1)
 #' # accuracy on train set
 #' mean(mod$y == mod$fitted)
 #' # accuracy on test set

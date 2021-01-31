@@ -3,7 +3,6 @@
 #' @importFrom grDevices gray
 #' @importFrom graphics image
 #'
-#' @param dataDir directory where MNIST data is in.
 #' @return a list(train=train, test=test), where
 #'
 #' train$x is 60000x784 matrix, each row is one digit (28x28), if byrow=TRUE,
@@ -12,10 +11,10 @@
 #'
 #' test$x is 10000x784 matrix, test$y is 10000-length vector, if byrow=TRUE.
 #' @export
-LoadMnist <- function(dataDir, byrow=TRUE) {
-  # dataDir = getSrcDirectory(function(x) {x})
+LoadMnist <- function(byrow=TRUE) {
+  dataDir <- file.path(Sys.getenv("R_LIBS_USER"), "data/mnist")
   LoadImages <- function(filename) {
-    f <- file(filename, "rb")
+    f <- gzfile(filename, "rb")
     readBin(f, "integer", n = 1, size = 4, endian = "big")
     N <- readBin(f, "integer", n = 1, size = 4, endian = "big")
     nrow <- readBin(f, "integer", n = 1, size = 4, endian = "big")
@@ -29,7 +28,7 @@ LoadMnist <- function(dataDir, byrow=TRUE) {
     }
   }
   LoadLabels <- function(filename) {
-    f <- file(filename, "rb")
+    f <- gzfile(filename, "rb")
     readBin(f, "integer", n = 1, size = 4, endian = "big")
     n <- readBin(f, "integer", n = 1, size = 4, endian = "big")
     y <- readBin(f, "integer", n = n, size = 1, signed = F)
@@ -39,12 +38,20 @@ LoadMnist <- function(dataDir, byrow=TRUE) {
 
   train = list()
   test = list()
-
-  train$x <- LoadImages(file.path(dataDir, "train-images-idx3-ubyte"))
-  test$x <- LoadImages(file.path(dataDir, "t10k-images-idx3-ubyte"))
-
-  train$y <- LoadLabels(file.path(dataDir, "train-labels-idx1-ubyte"))
-  test$y <- LoadLabels(file.path(dataDir, "t10k-labels-idx1-ubyte"))
+  
+  baseURL <- "http://yann.lecun.com/exdb/mnist/"
+  filenames <- c("train-images-idx3-ubyte.gz",
+                 "t10k-images-idx3-ubyte.gz",
+                 "train-labels-idx1-ubyte.gz",
+                 "t10k-labels-idx1-ubyte.gz")
+  urls <- paste0(baseURL, filenames)
+  lapply(urls, maybeDownload, dataDir = dataDir)
+  filenames <- file.path(dataDir, filenames)
+  
+  train$x <- LoadImages(filenames[1])
+  test$x <- LoadImages(filenames[2])
+  train$y <- LoadLabels(filenames[3])
+  test$y <- LoadLabels(filenames[4])
 
   invisible(list(train = train, test = test))
 }
@@ -97,4 +104,14 @@ BuildBatch <- function(data) {
         }
         ans
     }
+}
+
+# download if file not exists in the dataDir
+maybeDownload <- function(url, dataDir) {
+  dir.create(dataDir, recursive = TRUE, showWarnings = FALSE)
+  filename <- file.path(dataDir, basename(url))
+  if (!file.exists(filename)) {
+    download.file(url, filename)
+  }
+  return(filename)
 }
