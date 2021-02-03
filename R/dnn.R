@@ -129,9 +129,15 @@ learning.DNN <- function(object, x, y, weights, learningRate, ...) {
 
 #' @describeIn DNN prediction of Network
 #' @export
-predict.DNN <- function(object, newdata) {
+predict.DNN <- function(object, newdata, ...) {
   object <- Forward(object, newdata, stage="predict")
-  object$layer$a
+  t(object$layer$a)
+}
+
+#' @method NumParameters DNN
+#' @export
+NumParameters.DNN <- function(object, ...) {
+  return(NumParameters(object$layer))
 }
 
 #' @describeIn DNN prediction of class probability or labels when last layer is softmax

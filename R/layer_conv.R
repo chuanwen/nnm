@@ -116,3 +116,8 @@ InitParameters.Conv <- function(object, initWeightScale = 0.1, initBias = 0.01) 
   object$b = rep(initBias, kernelDim[4])
 	invisible(object)
 }
+
+#' @export
+NumParameters.Conv <- function(object, ...) {
+  return(prod(object$kernelDim) + object$kernelDim[4])
+}

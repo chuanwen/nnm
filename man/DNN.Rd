@@ -23,10 +23,9 @@ DNN(layer, loss, type = c("regression", "classification", "other"))
 
 \method{learning}{DNN}(object, x, y, weights, learningRate, ...)
 
-\method{predict}{DNN}(object, newdata)
+\method{predict}{DNN}(object, newdata, ...)
 
-\method{predict}{DNNClassifier}(object, newdata, type = c("response",
-  "label"))
+\method{predict}{DNNClassifier}(object, newdata, type = c("response", "label"))
 }
 \arguments{
 \item{layer}{a Layer object, which contains many layers. Usually you construct}
@@ -36,12 +35,6 @@ DNN(layer, loss, type = c("regression", "classification", "other"))
 \item{type}{type of the network, for classification, it's predict Generic}
 
 \item{object}{an DNN object}
-
-\item{x}{numeric matrix of dimension p x nobs, i.e. each col is a predictor vector.}
-
-\item{y}{a numeric or factor vector, or a numeric matrix of dimension
-q x nobs, i.e. each col is a response vector. If y is a vector, it will be
-converted to a matrix (nrow=1).}
 
 \item{x}{numeric matrix of dimension p x nobs, i.e. each col is a predictor vector.}
 

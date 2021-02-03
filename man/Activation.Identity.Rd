@@ -4,7 +4,9 @@
 \name{Activation.Identity}
 \alias{Activation.Identity}
 \title{Identity Activation object}
-\format{An object of class \code{Activation} of length 3.}
+\format{
+An object of class \code{Activation} of length 3.
+}
 \usage{
 Activation.Identity
 }

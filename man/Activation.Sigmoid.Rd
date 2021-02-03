@@ -4,7 +4,9 @@
 \name{Activation.Sigmoid}
 \alias{Activation.Sigmoid}
 \title{Sigmoid Activation object}
-\format{An object of class \code{Activation} of length 3.}
+\format{
+An object of class \code{Activation} of length 3.
+}
 \usage{
 Activation.Sigmoid
 }

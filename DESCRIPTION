@@ -1,14 +1,14 @@
 Package: nnm
 Type: Package
 Title: Neuron network models
-Version: 0.1.0
-Date: 2017-03-28
+Version: 0.1.1
+Date: 2021-02-01
 Author: Chuanwen Chen
 Maintainer: Chuanwen Chen <chuanwen@gmail.com>
 Description: Neuron network models
 License: Apache License 2.0 | file LICENSE
-Imports: Rcpp (>= 0.12.9)
-Depends: truncnorm
+Imports: Rcpp (>= 1.0.0)
+Depends: truncnorm, tidyverse
 LinkingTo: Rcpp
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
 Suggests: testthat

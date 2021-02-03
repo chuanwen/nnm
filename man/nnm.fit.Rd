@@ -4,16 +4,24 @@
 \alias{nnm.fit}
 \title{fit a (deep) neuron network model. It's a wrap of the DNN class.}
 \usage{
-nnm.fit(x, y, layerSpecs, weights, family = c("gaussian", "poisson",
-  "multinomial"), nEpoch = 5, batchSize = 100, learningRate = 0.25,
-  verbose = 0)
+nnm.fit(
+  x,
+  y,
+  layerSpecs,
+  weights,
+  family = c("gaussian", "poisson", "multinomial"),
+  nEpoch = 5,
+  batchSize = 100,
+  learningRate = 0.25,
+  verbose = 0
+)
 }
 \arguments{
 \item{x}{numeric matrix, of dimension nobs x nvars; each row is an observation vector.}
 
 \item{y}{response variable (vector or matrix). Quantitative for
-‘family="gaussian"’, or ‘family="poisson"’ (non-negative counts).
-For ‘family="multinomial"’, should be either a factor/character vector, or
+'family="gaussian"', or 'family="poisson"' (non-negative counts).
+For 'family="multinomial"', should be either a factor/character vector, or
 a matrix of N-Classes cols.}
 
 \item{layerSpecs}{either a list of layer specs, or a (composite) layer
@@ -52,4 +60,5 @@ mod = nnm.fit(train$x, train$y, list(Dense(784, 15),
 mean(mod$y == mod$fitted)
 # accuracy on test set
 mean(test$y == predict(mod, test$x, type="label"))
+
 }

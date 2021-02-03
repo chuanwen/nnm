@@ -4,8 +4,13 @@
 \alias{Dense}
 \title{A S3 class to represent Dense (full-connect) neuro layer.}
 \usage{
-Dense(inputDim, outputDim, activation = Activation.ReLU,
-  initWeightScale = 0.01, initBias = 0)
+Dense(
+  inputDim,
+  outputDim,
+  activation = Activation.ReLU,
+  initWeightScale = 0.01,
+  initBias = 0
+)
 }
 \arguments{
 \item{inputDim}{integer, refers to the dimension of one observation.}

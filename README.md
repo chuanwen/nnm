@@ -21,7 +21,7 @@ mod
 mnist <- LoadMnist()
 train <- mnist$train
 test <- mnist$test
-layerSpec <- list(
+layerSpec <- Sequential(
   Dense(784, 128),
   Dropout(128, keepProb=0.8),
   Dense(128, 10, Activation.Identity),

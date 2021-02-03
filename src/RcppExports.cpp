@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // conv3d
 NumericVector conv3d(NumericVector images_4d, NumericVector kernels_4d, NumericVector outImages_4d, std::string flag);
-RcppExport SEXP nnm_conv3d(SEXP images_4dSEXP, SEXP kernels_4dSEXP, SEXP outImages_4dSEXP, SEXP flagSEXP) {
+RcppExport SEXP _nnm_conv3d(SEXP images_4dSEXP, SEXP kernels_4dSEXP, SEXP outImages_4dSEXP, SEXP flagSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -21,7 +21,7 @@ END_RCPP
 }
 // convFlip
 NumericVector convFlip(NumericVector source, NumericVector target);
-RcppExport SEXP nnm_convFlip(SEXP sourceSEXP, SEXP targetSEXP) {
+RcppExport SEXP _nnm_convFlip(SEXP sourceSEXP, SEXP targetSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -33,7 +33,7 @@ END_RCPP
 }
 // sumConvInv
 NumericVector sumConvInv(NumericVector delta, NumericVector x, int H, int W);
-RcppExport SEXP nnm_sumConvInv(SEXP deltaSEXP, SEXP xSEXP, SEXP HSEXP, SEXP WSEXP) {
+RcppExport SEXP _nnm_sumConvInv(SEXP deltaSEXP, SEXP xSEXP, SEXP HSEXP, SEXP WSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -47,7 +47,7 @@ END_RCPP
 }
 // MaxPoolForwardC
 NumericVector MaxPoolForwardC(NumericVector x, int H, int W);
-RcppExport SEXP nnm_MaxPoolForwardC(SEXP xSEXP, SEXP HSEXP, SEXP WSEXP) {
+RcppExport SEXP _nnm_MaxPoolForwardC(SEXP xSEXP, SEXP HSEXP, SEXP WSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -60,7 +60,7 @@ END_RCPP
 }
 // MaxPoolBackwardC
 NumericVector MaxPoolBackwardC(NumericVector x, NumericVector a, NumericVector errorOut);
-RcppExport SEXP nnm_MaxPoolBackwardC(SEXP xSEXP, SEXP aSEXP, SEXP errorOutSEXP) {
+RcppExport SEXP _nnm_MaxPoolBackwardC(SEXP xSEXP, SEXP aSEXP, SEXP errorOutSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -70,4 +70,18 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(MaxPoolBackwardC(x, a, errorOut));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_nnm_conv3d", (DL_FUNC) &_nnm_conv3d, 4},
+    {"_nnm_convFlip", (DL_FUNC) &_nnm_convFlip, 2},
+    {"_nnm_sumConvInv", (DL_FUNC) &_nnm_sumConvInv, 4},
+    {"_nnm_MaxPoolForwardC", (DL_FUNC) &_nnm_MaxPoolForwardC, 3},
+    {"_nnm_MaxPoolBackwardC", (DL_FUNC) &_nnm_MaxPoolBackwardC, 3},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_nnm(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

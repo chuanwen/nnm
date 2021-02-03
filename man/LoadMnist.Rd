@@ -4,10 +4,7 @@
 \alias{LoadMnist}
 \title{Load the MNIST digit recognition dataset into R}
 \usage{
-LoadMnist(dataDir, byrow = TRUE)
-}
-\arguments{
-\item{dataDir}{directory where MNIST data is in.}
+LoadMnist(byrow = TRUE)
 }
 \value{
 a list(train=train, test=test), where

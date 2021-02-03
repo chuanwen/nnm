@@ -42,6 +42,16 @@ test_that("nnm with embedding factor + numeric data.frame", {
     x = iris[, 2:5]
     y = iris[, 1]
     layerSpec = list(Dense(3+3, 6), Dense(6, 1, Activation.Identity))
-    mod = nnm(x, y, layerSpec, embeddingCols="Species", embeddingDims=3)
+    mod = nnm(x, y, layerSpec, embeddingCols="Species", numEmbeddingDims=3)
+    expect_equal(length(mod$fitted), length(y))
+})
+
+test_that("nnm with embedding character + numeric data.frame", {
+    n <- 1000
+    x <- data.frame(x1 = rnorm(n),
+                    x2 = sample(letters[1:10], size=n, replace=TRUE))
+    y <- x$x1 + rnorm(n)
+    layerSpec = list(Dense(1+4, 6), Dense(6, 1, Activation.Identity))
+    mod = nnm(x, y, layerSpec, embeddingCols="x2", numEmbeddingDims=4)
     expect_equal(length(mod$fitted), length(y))
 })

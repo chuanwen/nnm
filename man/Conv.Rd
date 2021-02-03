@@ -4,8 +4,13 @@
 \alias{Conv}
 \title{A S3 class to represent Convoluation neuro layer.}
 \usage{
-Conv(inputDim, kernelDim, activation = Activation.ReLU,
-  initWeightScale = 0.1, initBias = 0.01)
+Conv(
+  inputDim,
+  kernelDim,
+  activation = Activation.ReLU,
+  initWeightScale = 0.1,
+  initBias = 0.01
+)
 }
 \arguments{
 \item{inputDim}{a size 3 vector to indicate the dimension of one observation.}

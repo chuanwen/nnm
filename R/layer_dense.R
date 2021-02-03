@@ -86,7 +86,13 @@ UpdateParameters.Dense <- function(object, learningRate) {
 
 #' @export
 InitParameters.Dense <- function(object, initWeightScale=0.01, initBias=0.0) {
-  object$W = matrix(rtruncnorm(row * col, -2, 2, initWeightScale), nrow = row)
+  row <- length(object$b)
+  object$W = matrix(rtruncnorm(length(object$W), -2, 2, initWeightScale), nrow = row)
   object$b = rep(initBias, row)
 	invisible(object)
+}
+
+#' @export
+NumParameters.Dense <- function(object) {
+  return(length(object$W) + length(object$b))
 }

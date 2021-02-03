@@ -2,22 +2,22 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 conv3d <- function(images_4d, kernels_4d, outImages_4d, flag) {
-    .Call('nnm_conv3d', PACKAGE = 'nnm', images_4d, kernels_4d, outImages_4d, flag)
+    .Call(`_nnm_conv3d`, images_4d, kernels_4d, outImages_4d, flag)
 }
 
 convFlip <- function(source, target) {
-    .Call('nnm_convFlip', PACKAGE = 'nnm', source, target)
+    .Call(`_nnm_convFlip`, source, target)
 }
 
 sumConvInv <- function(delta, x, H, W) {
-    .Call('nnm_sumConvInv', PACKAGE = 'nnm', delta, x, H, W)
+    .Call(`_nnm_sumConvInv`, delta, x, H, W)
 }
 
 MaxPoolForwardC <- function(x, H, W) {
-    .Call('nnm_MaxPoolForwardC', PACKAGE = 'nnm', x, H, W)
+    .Call(`_nnm_MaxPoolForwardC`, x, H, W)
 }
 
 MaxPoolBackwardC <- function(x, a, errorOut) {
-    .Call('nnm_MaxPoolBackwardC', PACKAGE = 'nnm', x, a, errorOut)
+    .Call(`_nnm_MaxPoolBackwardC`, x, a, errorOut)
 }
 
