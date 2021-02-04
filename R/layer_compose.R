@@ -119,19 +119,12 @@ InitParameters.CompositeLayer <- function(object, ...) {
   invisible(object)
 }
 
-NumParameters.CompositeLayer <- function(object, ...) {
-  sum(unlist(lapply(object$layers, NumParameters)))
-}
-
 #' @describeIn Sequential implement generic UpdateParameters function.
 #' @export
 UpdateParameters.Sequential = UpdateParameters.CompositeLayer
 
 #' @export
 InitParameters.Sequential = InitParameters.CompositeLayer
-
-#' @export
-NumParameters.Sequential <- NumParameters.CompositeLayer
 
 indexFromDim <- function(dims) {
   if (length(dims) == 0) {
@@ -227,8 +220,6 @@ UpdateParameters.Parallel <- UpdateParameters.CompositeLayer
 #' @export
 InitParameters.Parallel = InitParameters.CompositeLayer
 
-#' @export
-NumParameters.Parallel = NumParameters.CompositeLayer
 #' A S3 class to represent a directed acycle graph (DAG) of a list of
 # layer nodes.
 #'
@@ -354,9 +345,6 @@ UpdateParameters.DAG = UpdateParameters.CompositeLayer
 
 #' @export
 InitParameters.DAG = InitParameters.CompositeLayer
-
-#' @export
-NumParameters.DAG = NumParameters.CompositeLayer
 
 #' @export
 print.DAG <- function(x, left="", ...) {

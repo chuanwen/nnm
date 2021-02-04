@@ -316,9 +316,3 @@ predict.nnm.fit <- function(object, x, type=c("response", "label"), ...) {
     type = match.arg(type)
     predict(object$net, t(x), type)
 }
-
-#' @method NumParameters nnm.fit
-#' @export
-NumParameters.nnm.fit <- function(object, ...) {
-  return(NumParameters(object$net))
-}

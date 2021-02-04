@@ -31,13 +31,6 @@ UpdateParameters <- function(object, learningRate) UseMethod("UpdateParameters")
 #' @export
 InitParameters <- function(object, ...) UseMethod("InitParameters")
 
-#' Generic NumParameters function
-#'
-#' @param object Object that supports NumParameters function
-#' @param ... other arguments
-#' @export
-NumParameters <- function(object, ...) UseMethod("NumParameters")
-
 #' Generic Strip function
 #'
 #' @param object Object that supports Strip function
@@ -55,12 +48,6 @@ UpdateParameters.default <- function(object, learningRate) {
 #' @export
 InitParameters.default <- function(object, ...) {
   invisible(object)
-}
-
-#' Default implementation of NumParameters generic function
-#' @export
-NumParameters.default <- function(object, ...) {
-  return(0)
 }
 
 #' export

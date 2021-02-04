@@ -134,12 +134,6 @@ predict.DNN <- function(object, newdata, ...) {
   t(object$layer$a)
 }
 
-#' @method NumParameters DNN
-#' @export
-NumParameters.DNN <- function(object, ...) {
-  return(NumParameters(object$layer))
-}
-
 #' @describeIn DNN prediction of class probability or labels when last layer is softmax
 #' @export
 predict.DNNClassifier <- function(object, newdata, type = c("response", "label")) {
